@@ -29,21 +29,46 @@ npm run preview -- --host 0.0.0.0 --port 5175
 
 Seed data generator: `src/data/seedTasks.ts` (generates 500 tasks as required)
 
-## Deployment
+## Deployment (GitHub Pages)
 
-Deploy to Vercel (free tier):
+This project is deployed using GitHub Pages.
 
-1. Push code to GitHub/GitLab
-2. Connect repository to Vercel
-3. Deploy automatically
+### Step 1: Install dependency
 
-Or manually:
-```bash
-npm install -g vercel
-vercel --prod
-```
+npm install gh-pages --save-dev
 
-Live demo: [Add your Vercel URL here after deployment]
+### Step 2: Update `package.json`
+
+Add:
+
+"homepage": "https://rajeswari-29.github.io/multi-view-task-tracker"
+
+Update scripts:
+
+"predeploy": "npm run build",
+"deploy": "gh-pages -d dist"
+
+### Step 3: Configure Vite
+
+Update `vite.config.js`:
+
+export default defineConfig({
+  base: "/multi-view-task-tracker/",
+})
+
+### Step 4: Deploy
+
+npm run deploy
+
+### Live Demo
+
+https://rajeswari-29.github.io/multi-view-task-tracker/
+
+### Note
+
+* The `dist` folder is used because this project is built with Vite.
+* Setting the correct `base` path ensures assets load properly on GitHub Pages.
+
 
 I used Zustand because tasks are updated frequently from multiple UI surfaces (Kanban drag + inline List status dropdown). Zustand avoids prop drilling, keeps updates predictable via immutable updates, and remains lightweight for a highly interactive UI.
 
